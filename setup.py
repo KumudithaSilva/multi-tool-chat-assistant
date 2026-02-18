@@ -32,5 +32,3 @@ setup(
     packages=find_packages(where="src"),
     python_requires=">=3.11, <3.12",
 )
-
-
