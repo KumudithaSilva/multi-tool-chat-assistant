@@ -11,6 +11,7 @@ from logs.logger_singleton import Logger
 logger = Logger(name="fastapi")
 container = ChatbotContainer()
 
+
 # --- FastAPI app with lifespan context manager ---
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -38,6 +39,7 @@ class ChatHistory(BaseModel):
     """
     Request model for chat messages.
     """
+
     messages: List[Dict]
 
 
@@ -45,6 +47,7 @@ class ChatResponse(BaseModel):
     """
     Response model for initial chat history.
     """
+
     messages: List[Dict]
 
 
@@ -82,7 +85,9 @@ def user_request(data: ChatHistory):
             raise RuntimeError("AI client not initialized")
         logger.info("AI client available for request")
 
-        completion_service = container.create_chat_completion_service(ai_client=ai_client)
+        completion_service = container.create_chat_completion_service(
+            ai_client=ai_client
+        )
         response = completion_service.generate(messages=data.messages)
 
         logger.debug(f"Response: {response}")
@@ -96,7 +101,8 @@ def user_request(data: ChatHistory):
         raise HTTPException(
             status_code=500, detail=f"Error fetching response: {str(e)}"
         )
-    
+
+
 # --- Run Uvicorn ---
 if __name__ == "__main__":
     uvicorn.run(host="127.0.0.1", port=8000, app="chatbot_fastapi:app", reload=True)

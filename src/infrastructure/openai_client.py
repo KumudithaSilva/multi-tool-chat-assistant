@@ -1,4 +1,5 @@
 from typing import Dict, List
+
 from openai import OpenAI
 
 from interfaces.i_ai_client import IAIClient
@@ -25,20 +26,18 @@ class OpenAIClientWrapper(IAIClient):
         self.key_provider = key_provider.get_api_key()
         self.client = OpenAI(api_key=self.key_provider)
 
-
-    def chat_completions_create(self, messages: List[Dict], model: str = "gpt-4o-mini") -> str:
+    def chat_completions_create(
+        self, messages: List[Dict], model: str = "gpt-4o-mini"
+    ) -> str:
         """
         Sends a chat completion request to the AI backend.
 
         Args:
-            messages: List of chat messages 
+            messages: List of chat messages
             model: Model name to use.
 
         Returns:
             The AI-generated response text.
         """
-        response = self.client.chat.completions.create(
-            messages= messages,
-            model=model
-        )
+        response = self.client.chat.completions.create(messages=messages, model=model)
         return response

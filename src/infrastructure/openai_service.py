@@ -1,4 +1,3 @@
-import json
 from typing import Dict, List
 
 from openai import OpenAIError
@@ -47,8 +46,7 @@ class OpenAIService(IOpenAIOperations):
             self.logger.info("Sending client request to OpenAI API...")
             # Create chat completion request
             response = self.ai_client.chat_completions_create(
-                messages= messages,
-                model=model
+                messages=messages, model=model
             )
             self.logger.info("Received response from OpenAI API.")
 

@@ -50,7 +50,7 @@ class Logger(ILogger, metaclass=SingletonMeta):
 
     def error(self, message: str):
         self._logger.error(message, stacklevel=2)
-    
+
     def exception(self, message: str):
         self._logger.exception(message, stacklevel=2)
 

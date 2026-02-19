@@ -52,4 +52,3 @@ class ChatbotContainer:
         """
         openai_service: IOpenAIOperations = OpenAIService(ai_client)
         return ChatCompletionService(openai_service)
-

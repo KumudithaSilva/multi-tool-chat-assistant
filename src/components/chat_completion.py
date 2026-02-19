@@ -4,7 +4,6 @@ from interfaces.i_chatbot_completion import IChatCompletionService
 from interfaces.i_openai_operations import IOpenAIOperations
 
 
-
 class ChatCompletionService(IChatCompletionService):
     """
     Initializes AI chatbot using interface-based dependencies.
@@ -33,6 +32,5 @@ class ChatCompletionService(IChatCompletionService):
             str: Return response from AI
         """
         return self.openai_service.create_response(
-            messages=messages,
-            model="gpt-4o-mini"
+            messages=messages, model="gpt-4o-mini"
         )

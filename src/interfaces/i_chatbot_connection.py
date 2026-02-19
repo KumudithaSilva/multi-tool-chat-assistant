@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+
 from infrastructure.openai_client import OpenAIClientWrapper
 
 
