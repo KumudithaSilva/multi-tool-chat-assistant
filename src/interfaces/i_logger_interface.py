@@ -24,5 +24,9 @@ class ILogger(ABC):
         pass
 
     @abstractmethod
+    def exception(self, message: str) -> None:
+        pass
+
+    @abstractmethod
     def critical(self, message: str) -> None:
         pass
