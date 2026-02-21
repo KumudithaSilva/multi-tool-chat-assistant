@@ -1,15 +1,14 @@
 import json
 from typing import List, Dict
 
-from interfaces.i_tool_executor import IToolExecutor
-from utils.grocery_tools import get_item_price, get_count_item
-
+from interfaces.tools.i_tool import ITool
+from interfaces.tools.i_tool_executor import IToolExecutor
 
 
 class GroceryToolExecutor(IToolExecutor):
-    """
-    Executes grocery-related tool calls.
-    """
+
+    def __init__(self, tools: List[ITool]):
+        self._tool_registry = {tool.name: tool for tool in tools}
 
     def execute(self, message) -> List[Dict]:
         tool_messages = []
@@ -18,12 +17,10 @@ class GroceryToolExecutor(IToolExecutor):
             function_name = tool_call.function.name
             arguments = json.loads(tool_call.function.arguments)
 
-            if function_name == "get_item_price":
-                result = get_item_price(arguments.get("item"))
+            tool = self._tool_registry.get(function_name)
 
-            elif function_name == "get_count_item":
-                result = get_count_item(arguments.get("item"))
-
+            if tool:
+                result = tool.execute(arguments)
             else:
                 result = "Unknown function call."
 

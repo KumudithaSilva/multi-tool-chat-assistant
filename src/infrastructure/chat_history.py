@@ -1,7 +1,7 @@
 from typing import Dict, List
 
-from interfaces.i_chat_history import IChatHistory
-from interfaces.i_oneshot_prompt import IPrompt
+from interfaces.chat.i_chat_history import IChatHistory
+from interfaces.chat.i_oneshot_prompt import IPrompt
 from logs.logger_singleton import Logger
 
 

@@ -1,7 +1,7 @@
 from typing import Dict, List
 
-from interfaces.i_chat_history import IChatHistory
-from interfaces.i_chatbot_initialization import IChatInitialization
+from interfaces.chat.i_chat_history import IChatHistory
+from interfaces.chat.i_chatbot_initialization import IChatInitialization
 
 
 class ChatInitializationService(IChatInitialization):

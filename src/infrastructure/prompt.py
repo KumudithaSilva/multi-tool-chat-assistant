@@ -1,4 +1,4 @@
-from interfaces.i_oneshot_prompt import IPrompt
+from interfaces.chat.i_oneshot_prompt import IPrompt
 from logs.logger_singleton import Logger
 
 

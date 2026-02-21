@@ -1,7 +1,7 @@
 import os
 
-from interfaces.i_api_key_provider import IApiKeyProvider
-from interfaces.i_env_loader import IEnvLoader
+from interfaces.infra.i_api_key_provider import IApiKeyProvider
+from interfaces.infra.i_env_loader import IEnvLoader
 from logs.logger_singleton import Logger
 
 

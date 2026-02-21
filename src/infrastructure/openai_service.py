@@ -2,9 +2,9 @@ from typing import Dict, List
 
 from openai import OpenAIError
 
-from interfaces.i_ai_client import IAIClient
-from interfaces.i_openai_operations import IOpenAIOperations
-from interfaces.i_tool_executor import IToolExecutor
+from interfaces.bot.i_ai_client import IAIClient
+from interfaces.bot.i_openai_operations import IOpenAIOperations
+from interfaces.tools.i_tool_executor import IToolExecutor
 from logs.logger_singleton import Logger
 
 

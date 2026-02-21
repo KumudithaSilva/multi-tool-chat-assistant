@@ -1,8 +1,9 @@
 from typing import Dict, List
 
-from interfaces.i_chatbot_completion import IChatCompletionService
-from interfaces.i_openai_operations import IOpenAIOperations
-from tools.tool_definitions import TOOLS
+
+from interfaces.bot.i_openai_operations import IOpenAIOperations
+from interfaces.chat.i_chatbot_completion import IChatCompletionService
+from interfaces.tools.i_tool_schema import IToolSchema
 
 
 class ChatCompletionService(IChatCompletionService):
@@ -11,16 +12,19 @@ class ChatCompletionService(IChatCompletionService):
 
     Attributes:
         openai_service (IOpenAIOperations): Interface for AI operations.
+        tool_schema (IToolSchema): Interface for tool schema generation.
     """
 
-    def __init__(self, openai_service: IOpenAIOperations):
+    def __init__(self, openai_service: IOpenAIOperations, tool_schema: IToolSchema):
         """
         Initialize the ChatCompletionService.
 
         Args:
             openai_service (IOpenAIOperations): Interface for AI operations.
+            tool_schema (IToolSchema): Interface for tool schema generation.
         """
         self.openai_service: IOpenAIOperations = openai_service
+        self.tool_schema: IToolSchema = tool_schema
 
     def generate(self, messages: List[Dict]) -> str:
         """
@@ -32,7 +36,7 @@ class ChatCompletionService(IChatCompletionService):
         Returns:
             str: Return response from AI
         """
-        tool_list  = TOOLS
+        tool_list  = self.tool_schema.generate_schema()
         return self.openai_service.create_response(
             messages=messages, tools=tool_list, model="gpt-4o-mini"
         )

@@ -2,8 +2,8 @@ from typing import Dict, List
 
 from openai import OpenAI
 
-from interfaces.i_ai_client import IAIClient
-from interfaces.i_api_key_provider import IApiKeyProvider
+from interfaces.bot.i_ai_client import IAIClient
+from interfaces.infra.i_api_key_provider import IApiKeyProvider
 
 
 class OpenAIClientWrapper(IAIClient):

@@ -1,10 +1,10 @@
 from typing import Optional
 
 from infrastructure.openai_client import OpenAIClientWrapper
-from interfaces.i_ai_client import IAIClient
-from interfaces.i_api_key_provider import IApiKeyProvider
-from interfaces.i_chatbot_connection import IChatConnection
-from interfaces.i_env_loader import IEnvLoader
+from interfaces.bot.i_ai_client import IAIClient
+from interfaces.infra.i_api_key_provider import IApiKeyProvider
+from interfaces.chat.i_chatbot_connection import IChatConnection
+from interfaces.infra.i_env_loader import IEnvLoader
 
 
 class ChatConnectionService(IChatConnection):

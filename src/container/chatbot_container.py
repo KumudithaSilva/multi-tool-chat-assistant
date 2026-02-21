@@ -7,17 +7,20 @@ from infrastructure.openai_provider import OpenAIApiKeyProvider
 from infrastructure.openai_service import OpenAIService
 from infrastructure.prompt import PromptProvider
 from infrastructure.tool_handler import GroceryToolExecutor
-from interfaces.i_ai_client import IAIClient
-from interfaces.i_api_key_provider import IApiKeyProvider
-from interfaces.i_chat_history import IChatHistory
-from interfaces.i_chatbot_completion import IChatCompletionService
-from interfaces.i_chatbot_connection import IChatConnection
-from interfaces.i_chatbot_initialization import IChatInitialization
-from interfaces.i_env_loader import IEnvLoader
-from interfaces.i_oneshot_prompt import IPrompt
-from interfaces.i_openai_operations import IOpenAIOperations
-from interfaces.i_tool_executor import IToolExecutor
-from tools.tool_definitions import TOOLS
+from interfaces.bot.i_ai_client import IAIClient
+from interfaces.infra.i_api_key_provider import IApiKeyProvider
+from interfaces.chat.i_chat_history import IChatHistory
+from interfaces.chat.i_chatbot_completion import IChatCompletionService
+from interfaces.chat.i_chatbot_connection import IChatConnection
+from interfaces.chat.i_chatbot_initialization import IChatInitialization
+from interfaces.infra.i_env_loader import IEnvLoader
+from interfaces.chat.i_oneshot_prompt import IPrompt
+from interfaces.bot.i_openai_operations import IOpenAIOperations
+from interfaces.tools.i_tool_executor import IToolExecutor
+from interfaces.tools.i_tool_schema import IToolSchema
+from tools.grocery.tool_call_count import GetItemCountTool
+from tools.grocery.tool_call_price import GetItemPriceTool
+from infrastructure.tool_schema import ToolSchemaGenerator
 
 
 class ChatbotContainer:
@@ -42,20 +45,31 @@ class ChatbotContainer:
         Create and return a chat connection service with concrete
         or default dependencies.
         """
-        env_loader = env_loader or DotEnvLoader()
-        key_provider = key_provider or OpenAIApiKeyProvider(env_loader)
+        if env_loader is None:
+            env_loader = DotEnvLoader()
+
+        if key_provider is None:
+            key_provider = OpenAIApiKeyProvider(env_loader)
+            
         return ChatConnectionService(env_loader, key_provider)
 
     def create_chat_completion_service(
         self, 
         ai_client: IAIClient,
-        tool_executor: IToolExecutor = None
+        tool_executor: IToolExecutor = None,
+        tool_schema: IToolSchema = None
     ) -> IChatCompletionService:
         """
         Create and return a chat completion service using the
         provided AI client.
         """
-        tool_executor = tool_executor or GroceryToolExecutor()
+
+        if tool_executor is None:
+            tools = [GetItemCountTool(),GetItemPriceTool()]
+            tool_executor = tool_executor or GroceryToolExecutor(tools=tools)
+        
+        if tool_schema is None:
+            tool_schema = tool_schema or ToolSchemaGenerator(tools=tools)
 
         openai_service: IOpenAIOperations = OpenAIService(ai_client, tool_executor)
-        return ChatCompletionService(openai_service)
+        return ChatCompletionService(openai_service, tool_schema)

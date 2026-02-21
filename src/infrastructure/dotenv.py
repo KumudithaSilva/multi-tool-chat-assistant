@@ -1,6 +1,6 @@
 from dotenv import find_dotenv, load_dotenv
 
-from interfaces.i_env_loader import IEnvLoader
+from interfaces.infra.i_env_loader import IEnvLoader
 from logs.logger_singleton import Logger
 
 
