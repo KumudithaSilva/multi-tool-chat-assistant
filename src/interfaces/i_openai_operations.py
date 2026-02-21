@@ -8,6 +8,7 @@ class IOpenAIOperations(ABC):
     def create_response(
         self,
         messages: List[Dict],
+        tools: List[Dict],
         model: str = "gpt-4o-mini",
     ) -> str:
         pass
