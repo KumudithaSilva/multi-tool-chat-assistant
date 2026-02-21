@@ -2,6 +2,7 @@ from typing import Dict, List
 
 from interfaces.i_chatbot_completion import IChatCompletionService
 from interfaces.i_openai_operations import IOpenAIOperations
+from tools.tool_definitions import TOOLS
 
 
 class ChatCompletionService(IChatCompletionService):
@@ -31,6 +32,7 @@ class ChatCompletionService(IChatCompletionService):
         Returns:
             str: Return response from AI
         """
+        tool_list  = TOOLS
         return self.openai_service.create_response(
-            messages=messages, model="gpt-4o-mini"
+            messages=messages, tools=tool_list, model="gpt-4o-mini"
         )
