@@ -1,7 +1,7 @@
 import logging
 
 from core.singleton_meta import SingletonMeta
-from interfaces.i_logger_interface import ILogger
+from interfaces.logging.i_logger_interface import ILogger
 
 
 class Logger(ILogger, metaclass=SingletonMeta):
