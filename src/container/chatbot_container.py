@@ -6,6 +6,7 @@ from infrastructure.dotenv import DotEnvLoader
 from infrastructure.openai_provider import OpenAIApiKeyProvider
 from infrastructure.openai_service import OpenAIService
 from infrastructure.prompt import PromptProvider
+from infrastructure.tool_handler import GroceryToolExecutor
 from interfaces.i_ai_client import IAIClient
 from interfaces.i_api_key_provider import IApiKeyProvider
 from interfaces.i_chat_history import IChatHistory
@@ -15,6 +16,8 @@ from interfaces.i_chatbot_initialization import IChatInitialization
 from interfaces.i_env_loader import IEnvLoader
 from interfaces.i_oneshot_prompt import IPrompt
 from interfaces.i_openai_operations import IOpenAIOperations
+from interfaces.i_tool_executor import IToolExecutor
+from tools.tool_definitions import TOOLS
 
 
 class ChatbotContainer:
@@ -44,11 +47,15 @@ class ChatbotContainer:
         return ChatConnectionService(env_loader, key_provider)
 
     def create_chat_completion_service(
-        self, ai_client: IAIClient
+        self, 
+        ai_client: IAIClient,
+        tool_executor: IToolExecutor = None
     ) -> IChatCompletionService:
         """
         Create and return a chat completion service using the
         provided AI client.
         """
-        openai_service: IOpenAIOperations = OpenAIService(ai_client)
+        tool_executor = tool_executor or GroceryToolExecutor()
+
+        openai_service: IOpenAIOperations = OpenAIService(ai_client, tool_executor)
         return ChatCompletionService(openai_service)
