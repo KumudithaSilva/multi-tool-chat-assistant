@@ -1,3 +1,5 @@
+import os
+
 from fpdf import FPDF
 from datetime import datetime
 
@@ -63,9 +65,15 @@ class PDFGenerator:
         pdf.set_font("Arial", "I", 10)
         pdf.multi_cell(0, 6, "Thank you for shopping at SuperMart! Visit again.\nTerms & conditions apply.", align="C")
 
+        # CREATE TEMP DIRECTORY
+        temp_dir = os.path.join(os.getcwd(), "temp")
+        os.makedirs(temp_dir, exist_ok=True)
+
         # SAVE FILE
         filename = f"receipt_{customer}_{datetime.now().strftime('%Y%m%d_%H%M%S')}.pdf"
-        pdf.output(filename)
+        file_path = os.path.join(temp_dir, filename)
+
+        pdf.output(file_path)
         return filename
 
 
