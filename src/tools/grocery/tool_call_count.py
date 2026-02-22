@@ -1,7 +1,7 @@
 from typing import Dict
 
 from interfaces.tools.i_tool import ITool
-from tools.grocery.grocery_data import GROCERY_COUNTS
+from utils.item_count import get_item_count
 
 
 class GetItemCountTool(ITool):
@@ -23,8 +23,4 @@ class GetItemCountTool(ITool):
 
     def execute(self, arguments: Dict) -> str:
         item = arguments.get("item")
-        if not item:
-            return "Item not provided."
-
-        count = GROCERY_COUNTS.get(item.lower(), "unknown item")
-        return f"There are {count} of {item} in stock."
+        return get_item_count(item)

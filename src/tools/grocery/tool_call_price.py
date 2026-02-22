@@ -1,7 +1,7 @@
 from typing import Dict
 
 from interfaces.tools.i_tool import ITool
-from tools.grocery.grocery_data import GROCERY_PRICES
+from utils.item_price import get_item_price
 
 class GetItemPriceTool(ITool):
     
@@ -22,8 +22,4 @@ class GetItemPriceTool(ITool):
     
     def execute(self, arguments: Dict) -> str:
         item = arguments.get("item")
-        if not item:
-            return "Item not provided."
-
-        price = GROCERY_PRICES.get(item.lower(), "unknown item price")
-        return f"The price of {item} is {price}."
+        return get_item_price(item)
