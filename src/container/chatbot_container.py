@@ -20,6 +20,9 @@ from interfaces.tools.i_tool_executor import IToolExecutor
 from interfaces.tools.i_tool_schema import IToolSchema
 from tools.grocery.tool_call_count import GetItemCountTool
 from tools.grocery.tool_call_price import GetItemPriceTool
+from tools.grocery.tool_call_availability import CheckItemExistenceTool
+from tools.grocery.tool_call_quote import GenerateQuoteTool
+from tools.grocery.too_call_pdf_generator import GenerateReceiptPDFTool
 from infrastructure.tool_schema import ToolSchemaGenerator
 
 
@@ -65,7 +68,13 @@ class ChatbotContainer:
         """
 
         if tool_executor is None:
-            tools = [GetItemCountTool(),GetItemPriceTool()]
+            tools = [
+                GetItemCountTool(), 
+                GetItemPriceTool(),
+                CheckItemExistenceTool(),
+                GenerateQuoteTool(),
+                GenerateReceiptPDFTool()
+                ]
             tool_executor = tool_executor or GroceryToolExecutor(tools=tools)
         
         if tool_schema is None:
