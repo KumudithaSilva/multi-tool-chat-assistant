@@ -1,7 +1,8 @@
 import os
+from datetime import datetime
 
 from fpdf import FPDF
-from datetime import datetime
+
 
 class PDFGenerator:
     SHOP_NAME = "SuperMart"
@@ -10,7 +11,7 @@ class PDFGenerator:
     SHOP_EMAIL = "info@supermart.lk"
 
     def create_pdf(self, quote: dict, customer: str) -> str:
-        pdf = FPDF('P', 'mm', 'A4')
+        pdf = FPDF("P", "mm", "A4")
         pdf.add_page()
 
         # HEADER
@@ -18,7 +19,13 @@ class PDFGenerator:
         pdf.cell(0, 10, self.SHOP_NAME, ln=True, align="C")
         pdf.set_font("Arial", "", 10)
         pdf.cell(0, 5, self.SHOP_ADDRESS, ln=True, align="C")
-        pdf.cell(0, 5, f"Phone: {self.SHOP_PHONE} | Email: {self.SHOP_EMAIL}", ln=True, align="C")
+        pdf.cell(
+            0,
+            5,
+            f"Phone: {self.SHOP_PHONE} | Email: {self.SHOP_EMAIL}",
+            ln=True,
+            align="C",
+        )
         pdf.ln(7)
 
         # CUSTOMER INFO
@@ -29,7 +36,7 @@ class PDFGenerator:
 
         # TABLE HEADER
         pdf.set_font("Arial", "B", 11)
-        pdf.set_fill_color(200, 200, 200)  
+        pdf.set_fill_color(200, 200, 200)
         pdf.cell(80, 8, "Item", border=1, fill=True)
         pdf.cell(30, 8, "Qty", border=1, align="C", fill=True)
         pdf.cell(40, 8, "Price", border=1, align="R", fill=True)
@@ -39,9 +46,9 @@ class PDFGenerator:
         # TABLE ROWS
         pdf.set_font("Arial", "", 12)
         for line in quote.get("quote_lines", []):
-            price = line['subtotal'] / line['quantity'] if line['quantity'] else 0
-            pdf.cell(80, 8, line['item'], border=1)
-            pdf.cell(30, 8, str(line['quantity']), border=1, align="C")
+            price = line["subtotal"] / line["quantity"] if line["quantity"] else 0
+            pdf.cell(80, 8, line["item"], border=1)
+            pdf.cell(30, 8, str(line["quantity"]), border=1, align="C")
             pdf.cell(40, 8, f"LKR {price:.2f}", border=1, align="R")
             pdf.cell(40, 8, f"LKR {line['subtotal']:.2f}", border=1, align="R")
             pdf.ln()
@@ -63,7 +70,12 @@ class PDFGenerator:
         # FOOTER
         pdf.ln(10)
         pdf.set_font("Arial", "I", 10)
-        pdf.multi_cell(0, 6, "Thank you for shopping at SuperMart! Visit again.\nTerms & conditions apply.", align="C")
+        pdf.multi_cell(
+            0,
+            6,
+            "Thank you for shopping at SuperMart! Visit again.\nTerms & conditions apply.",
+            align="C",
+        )
 
         # CREATE TEMP DIRECTORY
         temp_dir = os.path.join(os.getcwd(), "temp")
@@ -84,7 +96,7 @@ if __name__ == "__main__":
             {"item": "Bread", "quantity": 2, "subtotal": 400.00},
         ],
         "total": 700.00,
-        "notes": ["Thank you for shopping with us!"]
+        "notes": ["Thank you for shopping with us!"],
     }
     generator = PDFGenerator()
     generator.create_pdf(quote, "John Doe")

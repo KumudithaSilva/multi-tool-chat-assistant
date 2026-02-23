@@ -1,8 +1,8 @@
 from typing import Dict
 
 from interfaces.tools.i_tool import ITool
-from tools.grocery.grocery_data import GROCERY_COUNTS
 from utils.item_existence import check_item_exists
+
 
 class CheckItemExistenceTool(ITool):
 
@@ -10,13 +10,10 @@ class CheckItemExistenceTool(ITool):
     parameters = {
         "type": "object",
         "properties": {
-            "item": {
-                "type": "string",
-                "description": "The grocery item name"
-            }
+            "item": {"type": "string", "description": "The grocery item name"}
         },
         "required": ["item"],
-        "additionalProperties": False
+        "additionalProperties": False,
     }
 
     @property

@@ -1,5 +1,7 @@
 import json
+
 from tools.grocery.grocery_data import GROCERY_COUNTS, GROCERY_PRICES
+
 
 def generate_quote(items: list) -> str:
     total = 0
@@ -22,15 +24,9 @@ def generate_quote(items: list) -> str:
         item_total = price * item_quantity
         total += item_total
 
-        quote_lines.append({
-            "item": item_name,
-            "quantity": item_quantity,
-            "subtotal": item_total
-        })
+        quote_lines.append(
+            {"item": item_name, "quantity": item_quantity, "subtotal": item_total}
+        )
 
-    quote_dict = {
-        "quote_lines": quote_lines,
-        "notes": notes,
-        "total": total
-    }
+    quote_dict = {"quote_lines": quote_lines, "notes": notes, "total": total}
     return json.dumps(quote_dict, indent=2)

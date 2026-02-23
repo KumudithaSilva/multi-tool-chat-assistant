@@ -14,7 +14,7 @@ class GetItemCountTool(ITool):
             "item": {"type": "string", "description": "The grocery item name"}
         },
         "required": ["item"],
-        "additionalProperties": False
+        "additionalProperties": False,
     }
 
     @property

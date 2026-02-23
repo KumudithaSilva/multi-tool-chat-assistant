@@ -1,9 +1,8 @@
-import json
-from typing import Any, Dict
+from typing import Dict
 
 from interfaces.tools.i_tool import ITool
-from tools.grocery.grocery_data import GROCERY_COUNTS, GROCERY_PRICES
 from utils.generate_quote import generate_quote
+
 
 class GenerateQuoteTool(ITool):
 
@@ -18,21 +17,21 @@ class GenerateQuoteTool(ITool):
                     "type": "object",
                     "properties": {
                         "item": {"type": "string"},
-                        "quantity": {"type": "integer"}
+                        "quantity": {"type": "integer"},
                     },
                     "required": ["item", "quantity"],
-                    "additionalProperties": False
-                }
+                    "additionalProperties": False,
+                },
             }
         },
         "required": ["items"],
-        "additionalProperties": False
+        "additionalProperties": False,
     }
 
     @property
     def name(self) -> str:
         return "generate_quote"
-    
+
     def execute(self, arguments: Dict) -> str:
         items = arguments.get("items", [])
         return generate_quote(items)

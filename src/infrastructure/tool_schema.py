@@ -5,7 +5,7 @@ from interfaces.tools.i_tool_schema import IToolSchema
 
 
 class ToolSchemaGenerator(IToolSchema):
-    
+
     def __init__(self, tools: List[ITool]):
         self._tools = tools
 

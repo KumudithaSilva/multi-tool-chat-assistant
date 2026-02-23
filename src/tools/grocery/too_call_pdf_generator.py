@@ -1,7 +1,6 @@
-from typing import Dict
-
 from interfaces.tools.i_tool import ITool
 from utils.pdf_generator import PDFGenerator
+
 
 class GenerateReceiptPDFTool(ITool):
 
@@ -10,7 +9,7 @@ class GenerateReceiptPDFTool(ITool):
         "properties": {
             "customer_name": {
                 "type": "string",
-                "description": "Name of the customer for the PDF receipt"
+                "description": "Name of the customer for the PDF receipt",
             },
             "quote": {
                 "type": "object",
@@ -22,30 +21,39 @@ class GenerateReceiptPDFTool(ITool):
                         "items": {
                             "type": "object",
                             "properties": {
-                                "item": {"type": "string", "description": "Name of the item"},
-                                "quantity": {"type": "number", "description": "Quantity purchased"},
-                                "subtotal": {"type": "number", "description": "Subtotal for this item (price x quantity)"}
+                                "item": {
+                                    "type": "string",
+                                    "description": "Name of the item",
+                                },
+                                "quantity": {
+                                    "type": "number",
+                                    "description": "Quantity purchased",
+                                },
+                                "subtotal": {
+                                    "type": "number",
+                                    "description": "Subtotal for this item (price x quantity)",
+                                },
                             },
                             "required": ["item", "quantity", "subtotal"],
-                            "additionalProperties": False
-                        }
+                            "additionalProperties": False,
+                        },
                     },
                     "total": {
                         "type": "number",
-                        "description": "Total amount for all items"
+                        "description": "Total amount for all items",
                     },
                     "notes": {
                         "type": "array",
                         "description": "Optional notes for the receipt",
-                        "items": {"type": "string"}
-                    }
+                        "items": {"type": "string"},
+                    },
                 },
                 "required": ["quote_lines", "total"],
-                "additionalProperties": False
-            }
+                "additionalProperties": False,
+            },
         },
         "required": ["customer_name", "quote"],
-        "additionalProperties": False
+        "additionalProperties": False,
     }
 
     @property
