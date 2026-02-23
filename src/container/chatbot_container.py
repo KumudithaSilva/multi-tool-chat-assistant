@@ -24,6 +24,8 @@ from tools.grocery.tool_call_availability import CheckItemExistenceTool
 from tools.grocery.tool_call_count import GetItemCountTool
 from tools.grocery.tool_call_price import GetItemPriceTool
 from tools.grocery.tool_call_quote import GenerateQuoteTool
+from tools.grocery.tool_call_email import EmailTool
+
 
 
 class ChatbotContainer:
@@ -74,6 +76,7 @@ class ChatbotContainer:
                 CheckItemExistenceTool(),
                 GenerateQuoteTool(),
                 GenerateReceiptPDFTool(),
+                EmailTool()
             ]
             tool_executor = tool_executor or GroceryToolExecutor(tools=tools)
 
