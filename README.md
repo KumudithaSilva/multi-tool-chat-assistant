@@ -131,12 +131,11 @@ This creates a **closed-loop reasoning + execution system**.
 
 #### Chat Assistant Chat Output
 
-<img width="500" height="900" alt="image" src="https://github.com/user-attachments/assets/"/>
-
+<img width="500" height="900" alt="image" src="https://github.com/user-attachments/assets/4acfc510-d0e8-48bf-b997-813641f8aae1"/>
 
 #### Chat Assistant Generated Email Output
 
-<img width="500" height="900" alt="image" src="https://github.com/user-attachments/assets/"/>
+<img width="500" height="450" alt="image" src="https://github.com/user-attachments/assets/861cca90-9db4-40b2-9e11-0136a619e2c2"/>
 
 
 
