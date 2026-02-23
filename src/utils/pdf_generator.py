@@ -1,8 +1,9 @@
 import os
 from datetime import datetime
-from utils.config_loader import ConfigLoader
 
 from fpdf import FPDF
+
+from utils.config_loader import ConfigLoader
 
 
 class PDFGenerator:
@@ -22,7 +23,7 @@ class PDFGenerator:
         pdf.set_font("Arial", "B", 18)
         pdf.cell(0, 10, self.shop_name, ln=True, align="C")
         pdf.set_font("Arial", "", 10)
-        pdf.cell(0, 5, self.shop_address , ln=True, align="C")
+        pdf.cell(0, 5, self.shop_address, ln=True, align="C")
         pdf.cell(
             0,
             5,

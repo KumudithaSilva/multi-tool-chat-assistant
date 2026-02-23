@@ -1,4 +1,5 @@
 from datetime import datetime
+
 from utils.config_loader import ConfigLoader
 
 
@@ -13,7 +14,7 @@ class HtmlEmailTemplate:
         self.quote = quote
 
     def build_receipt_html(self) -> str:
-        
+
         rows = ""
         for line in self.quote.get("quote_lines", []):
             price = line["subtotal"] / line["quantity"] if line["quantity"] else 0

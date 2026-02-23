@@ -69,6 +69,8 @@ class EmailTool(ITool):
         recipient_email = arguments["customer_email"]
 
         email_service = EmailService()
-        email_response = email_service.send_email(recipient_email=recipient_email, text=text)
+        email_response = email_service.send_email(
+            recipient_email=recipient_email, text=text
+        )
 
         return email_response

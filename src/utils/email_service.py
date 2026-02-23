@@ -33,18 +33,18 @@ class EmailService:
     ):
         email_template = HtmlEmailTemplate(quote=text)
         receipt_html = email_template.build_receipt_html()
-        
+
         mail = mt.Mail(
             sender=mt.Address(email=sender_email, name=sender_name),
             to=[mt.Address(email=recipient_email)],
             subject=subject,
-            html=receipt_html, 
+            html=receipt_html,
             category="Integration Test",
         )
 
         response = self.client.send(mail)
 
-        if response.get('success'):
+        if response.get("success"):
             return f"Email sent to {recipient_email}"
         else:
             return f"Error sending email to {recipient_email}"
