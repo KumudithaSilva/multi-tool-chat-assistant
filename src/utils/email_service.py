@@ -4,6 +4,7 @@ from infrastructure.dotenv import DotEnvLoader
 from infrastructure.email_provider import EmailApiKeyProvider
 from interfaces.infra.i_api_key_provider import IApiKeyProvider
 from interfaces.infra.i_env_loader import IEnvLoader
+from utils.email_template import HtmlEmailTemplate
 
 
 class EmailService:
@@ -25,21 +26,28 @@ class EmailService:
     def send_email(
         self,
         recipient_email: str,
-        text: str,
+        text: dict,
         sender_email: str = "hello@demomailtrap.co",
         sender_name: str = "SuperMart",
         subject: str = "SuperMart Receipt",
     ):
+        email_template = HtmlEmailTemplate(quote=text)
+        receipt_html = email_template.build_receipt_html()
+        
         mail = mt.Mail(
             sender=mt.Address(email=sender_email, name=sender_name),
             to=[mt.Address(email=recipient_email)],
             subject=subject,
-            text=text,
+            html=receipt_html, 
             category="Integration Test",
         )
 
         response = self.client.send(mail)
-        return response
+
+        if response.get('success'):
+            return f"Email sent to {recipient_email}"
+        else:
+            return f"Error sending email to {recipient_email}"
 
 
 if __name__ == "__main__":
