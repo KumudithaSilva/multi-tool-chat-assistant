@@ -1,13 +1,12 @@
 from typing import Dict
 
 from interfaces.tools.i_tool import ITool
-from utils.item_count import get_item_count
+from utils.item_existence import check_item_exists
 
 
-class GetItemCountTool(ITool):
+class CheckItemExistenceTool(ITool):
 
-    # Use default ITool schema generation based on class attributes
-    description = "Get available stock count of an item"
+    description = "Check whether a grocery item exists in inventory"
     parameters = {
         "type": "object",
         "properties": {
@@ -19,8 +18,8 @@ class GetItemCountTool(ITool):
 
     @property
     def name(self) -> str:
-        return "get_count_item"
+        return "check_item_existence"
 
     def execute(self, arguments: Dict) -> str:
         item = arguments.get("item")
-        return get_item_count(item)
+        return check_item_exists(item)

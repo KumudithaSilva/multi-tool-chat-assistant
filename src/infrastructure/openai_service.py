@@ -37,7 +37,9 @@ class OpenAIService(IOpenAIOperations):
         self.tool_executor = tool_executor
         self.logger = logger or Logger(self.__class__.__name__)
 
-    def create_response(self, messages: List[Dict], tools: List[Dict], model: str = "gpt-4o-mini") -> str:
+    def create_response(
+        self, messages: List[Dict], tools: List[Dict], model: str = "gpt-4o-mini"
+    ) -> str:
         """
         Generate response for client request
 
@@ -72,11 +74,13 @@ class OpenAIService(IOpenAIOperations):
                 assistant_message = response.choices[0].message
 
                 # Append the assistant message that triggered the tool calls to the messages list
-                messages.append({
-                    "role": assistant_message.role,
-                    "content": assistant_message.content or "",
-                    "tool_calls": assistant_message.tool_calls
-                })
+                messages.append(
+                    {
+                        "role": assistant_message.role,
+                        "content": assistant_message.content or "",
+                        "tool_calls": assistant_message.tool_calls,
+                    }
+                )
                 # Log the appended message for debugging
                 self.logger.debug(f"Appended message: {messages[-1]}")
 
@@ -88,13 +92,13 @@ class OpenAIService(IOpenAIOperations):
                 for tr in tool_responses:
                     self.logger.debug(f"Appending tool response: {tr}")
                     messages.append(tr)
-                
+
                 response = self.ai_client.chat_completions_create(
-                messages=messages, tools=tools, model=model
+                    messages=messages, tools=tools, model=model
                 )
                 # Log the new response for debugging
                 self.logger.debug(f"Updated response after tool calls: {response}")
-                
+
                 # Extract the raw content and update the finish reason
                 content = response.choices[0].message.content
                 finish_reason = response.choices[0].finish_reason

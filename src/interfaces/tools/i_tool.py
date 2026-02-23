@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 from typing import Dict
 
+
 class ITool(ABC):
     @property
     @abstractmethod
@@ -12,7 +13,7 @@ class ITool(ABC):
         return {
             "name": self.name,
             "description": getattr(self, "description", "No description provided"),
-            "parameters": getattr(self, "parameters", {})
+            "parameters": getattr(self, "parameters", {}),
         }
 
     @abstractmethod

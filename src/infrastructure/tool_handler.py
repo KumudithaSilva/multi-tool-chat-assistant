@@ -1,5 +1,5 @@
 import json
-from typing import List, Dict
+from typing import Dict, List
 
 from interfaces.tools.i_tool import ITool
 from interfaces.tools.i_tool_executor import IToolExecutor
@@ -24,10 +24,8 @@ class GroceryToolExecutor(IToolExecutor):
             else:
                 result = "Unknown function call."
 
-            tool_messages.append({
-                "role": "tool",
-                "content": result,
-                "tool_call_id": tool_call.id
-            })
+            tool_messages.append(
+                {"role": "tool", "content": result, "tool_call_id": tool_call.id}
+            )
 
         return tool_messages
