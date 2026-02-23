@@ -1,14 +1,18 @@
 import os
 from datetime import datetime
+from utils.config_loader import ConfigLoader
 
 from fpdf import FPDF
 
 
 class PDFGenerator:
-    SHOP_NAME = "SuperMart"
-    SHOP_ADDRESS = "123 Main Street, Colombo, Sri Lanka"
-    SHOP_PHONE = "+94 77 123 4567"
-    SHOP_EMAIL = "info@supermart.lk"
+
+    def __init__(self):
+        shop_info = ConfigLoader.get_shop_info()
+        self.shop_name = shop_info.get("name", "")
+        self.shop_address = shop_info.get("address", "")
+        self.shop_phone = shop_info.get("phone", "")
+        self.shop_email = shop_info.get("email", "")
 
     def create_pdf(self, quote: dict, customer: str) -> str:
         pdf = FPDF("P", "mm", "A4")
@@ -16,13 +20,13 @@ class PDFGenerator:
 
         # HEADER
         pdf.set_font("Arial", "B", 18)
-        pdf.cell(0, 10, self.SHOP_NAME, ln=True, align="C")
+        pdf.cell(0, 10, self.shop_name, ln=True, align="C")
         pdf.set_font("Arial", "", 10)
-        pdf.cell(0, 5, self.SHOP_ADDRESS, ln=True, align="C")
+        pdf.cell(0, 5, self.shop_address , ln=True, align="C")
         pdf.cell(
             0,
             5,
-            f"Phone: {self.SHOP_PHONE} | Email: {self.SHOP_EMAIL}",
+            f"Phone: {self.shop_phone} | Email: {self.shop_email}",
             ln=True,
             align="C",
         )
