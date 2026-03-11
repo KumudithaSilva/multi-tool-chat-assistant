@@ -56,12 +56,12 @@ The system is built using **clean architecture principles** with clear separatio
 
 ### 🛒 Grocery-Specific Functionalities
 
-- ✅ Item availability check  
-- 💲 Price lookup  
-- 📦 Inventory quantity retrieval  
-- 🧾 Quote generation  
-- 📄 Receipt PDF generation  
-- 📧 Email delivery  
+- Item availability check  
+- Price lookup  
+- Inventory quantity retrieval  
+- Quote generation  
+- Receipt PDF generation  
+- Email delivery  
 
 
 ## 📸 Chat Assistant App Output (UI Preview)
@@ -245,14 +245,14 @@ AI Model Response
 
 We welcome contributions related to:
 
-- ⚙️ Additional grocery tools
-- 📊 Database integration for inventory
-- 🔉 Additional language support
-- 🧠 AI & Prompt Engineering  
-- 🧱 Architecture Improvements  
-- 🌐 Backend Enhancements  
-- 🎨 UI Improvements  
-- 🧪 Testing & Quality Assurance  
+- Additional grocery tools
+- Database integration for inventory
+- Additional language support
+- AI & Prompt Engineering  
+- Architecture Improvements  
+- Backend Enhancements  
+- UI Improvements  
+- Testing & Quality Assurance  
 
 ### Contribution Steps
 
