@@ -1,4 +1,4 @@
-# 🛒✨ Multi-Tool Chat Assistant — Agentic Grocery AI System
+# Multi-Tool Chat Assistant — Agentic Grocery AI System
 
 <p align="center">
   <img src="https://img.shields.io/badge/AI-Agentic%20LLM-6A1B9A" />
@@ -13,7 +13,7 @@
 </p>
 
 
-## 🎯 Overview
+## Overview
 
 The Multi-Tool Chat Assistant is an AI-powered chatbot system built specifically for modern grocery store operations. It goes beyond traditional Q&A chatbots by combining intelligent intent understanding with autonomous tool execution using OpenAI’s GPT-4 function-calling capabilities.
 
@@ -44,9 +44,9 @@ The Multi-Tool Chat Assistant solves this by:
 The system is built using **clean architecture principles** with clear separation of concerns, making it maintainable, testable, and extensible and The assistant doesn’t just answer questions —  it **decides what action to take**, executes it, and delivers results.
 
 
-## ✨ Core Features
+## Core Features
 
-### 🧠 Agentic Capabilities
+### Agentic Capabilities
 
 - Intent detection
 - Multi-step reasoning
@@ -54,7 +54,7 @@ The system is built using **clean architecture principles** with clear separatio
 - Recursive tool execution
 - Context-aware responses
 
-### 🛒 Grocery-Specific Functionalities
+### Grocery-Specific Functionalities
 
 - Item availability check  
 - Price lookup  
@@ -64,7 +64,7 @@ The system is built using **clean architecture principles** with clear separatio
 - Email delivery  
 
 
-## 📸 Chat Assistant App Output (UI Preview)
+## Chat Assistant App Output (UI Preview)
 
 #### Chat Assistant Chat Output
 
@@ -77,7 +77,7 @@ The system is built using **clean architecture principles** with clear separatio
 
 
 
-## 🏗️ Architecture
+## Architecture
 
 The system is follows a layered, interface-driven architecture, designed to ensure modularity, maintainability, and extensibility. Fundamental design principles include dependency injection, interface-based abstraction, separation of concerns, and a plugin-oriented tool architecture.
 
@@ -128,7 +128,7 @@ The system is follows a layered, interface-driven architecture, designed to ensu
 - <b>Container LayerL</b>: Oversees dependency injection and management of singleton instances.
 
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 multi-tool-chat-assistant/
@@ -196,7 +196,7 @@ multi-tool-chat-assistant/
 └── README.md                       # This file
 ```
 
-  ## 🔄 How It Works
+  ## How It Works
 
 ### Request Flow
 
@@ -241,7 +241,7 @@ AI Model Response
                (Display to user)
 ```
 
-## 🤝 Contributing
+## Contributing
 
 We welcome contributions related to:
 
@@ -262,7 +262,7 @@ We welcome contributions related to:
 4. 📤 Open a Pull Request  
 
 
-## 🔀 Git Flow Workflow
+## Git Flow Workflow
 
 The project follows a Git Flow–inspired workflow:
 
